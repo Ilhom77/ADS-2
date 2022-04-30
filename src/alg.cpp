@@ -1,40 +1,42 @@
 #include <cstdint>
 #include "alg.h"
-
-uint64_t i;
-double t = 1;
-for (i = 1; i <= n; i++)
-t *= value;
-return t;
+double pown(double value, uint16_t n) {
+    uint64_t i;
+    double x = 1;
+    for (i = 1; i <= n; i++)
+        x *= value;
+    return x;
 }
-
 uint64_t fact(uint16_t n) {
-if (n == 0)
-return 1;
-  return fact(n-1)*n}
+    if (n == 0)
+        return 1;
+    return fact(n-1)*n;
 }
-double calcItem(double t, uint16_t n) {
-return pown(t, n)/fact(n);
+double calcItem(double x, uint16_t n) {
+    return pown(x, n)/fact(n);
 }
-double expn(double t, uint16_t count) {
-uint16_t i;
-double a;
-for (i = 0; i <= count; i++) {
-a += calcItem(t, i);
+double expn(double x, uint16_t count) {
+    uint16_t i;
+    double p;
+    for (i = 0; i <= count; i++) {
+        p += calcItem(x, i);
+    }
+    return p;
 }
-  return a;
+double sinn(double x, uint16_t count) {
+    uint16_t i;
+    double p = 0;
+    for (i = 1; i <= count; i++) {
+        p += pown(-1, i-1)*calcItem(x, 2*i-1);
+    }
+    return p;
 }
 
-a += pown(-1, i-1)*calcItem(t, 2*i-1);
-}
-return a;
-}
-
-double cosn(double t, uint16_t count) {
-uint16_t i;
-double a = 0;
-for (i = 1; i <= count; i++) {
-a += pown(-1, i-1)*calcItem(t, 2*i-2);
-}
-return a;
+double cosn(double x, uint16_t count) {
+    uint16_t i;
+    double p = 0;
+    for (i = 1; i <= count; i++) {
+        p += pown(-1, i-1)*calcItem(x, 2*i-2);
+    }
+    return p;
 }
